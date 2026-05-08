@@ -12,13 +12,13 @@ const total = data.reduce((s, d) => s + d.value, 0);
 
 export function CategoryBreakdown() {
   return (
-    <div className="rounded-2xl border border-border/60 bg-card p-5 shadow-[0_10px_40px_-20px_rgba(0,0,0,0.1)]">
+    <div className="rounded-2xl border border-border/60 bg-card p-5 shadow-[0_10px_40px_-20px_rgba(0,0,0,0.1)] focus:outline-none focus:ring-0 [&_*]:focus:outline-none [&_*]:focus:ring-0 [&_*]:border-none">
       <h3 className="text-base font-semibold text-brand-charcoal">Spending by category</h3>
       <p className="text-xs text-brand-charcoal/60">This month</p>
 
       <div className="relative mt-4 h-52">
         <ResponsiveContainer width="100%" height="100%">
-          <PieChart>
+          <PieChart style={{ outline: 'none', border: 'none' }}>
             <Tooltip formatter={(v: number) => `$${v.toLocaleString()}`} contentStyle={{ borderRadius: 12 }} />
             <Pie data={data} dataKey="value" nameKey="name" innerRadius={56} outerRadius={84} paddingAngle={3} stroke="none">
               {data.map((d) => (

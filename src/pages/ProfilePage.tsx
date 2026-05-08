@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { User, Mail, Phone, Camera, Lock, Upload } from "lucide-react";
+import { User, Mail, Phone, Camera, Lock, Upload, Shield, Award, Zap, TrendingUp } from "lucide-react";
 
 function ProfilePage() {
   const [profileData, setProfileData] = useState({
@@ -35,48 +35,95 @@ function ProfilePage() {
     console.log("Profile saved:", profileData);
   };
 
+  const stats = [
+    { label: "Account Status", value: "Active", icon: Shield, color: "emerald" },
+    { label: "Member Since", value: "Jan 2024", icon: Award, color: "blue" },
+    { label: "Total Savings", value: "$12,450", icon: TrendingUp, color: "yellow" },
+    { label: "Quick Actions", value: "3", icon: Zap, color: "purple" },
+  ];
+
   return (
-    <div className="space-y-6">
-      {/* Header */}
-      <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-        <div>
-          <h1 className="text-2xl font-bold tracking-tight text-brand-charcoal">Profile</h1>
-          <p className="text-sm text-brand-charcoal/60">Manage your personal information and account settings.</p>
-        </div>
-        <div className="flex gap-2">
-          <Button variant="outline" onClick={() => setShowPasswordDialog(true)}>
-            <Lock className="h-4 w-4 mr-2" />
-            Change Password
-          </Button>
-          <Button onClick={handleSave}>
-            <User className="h-4 w-4 mr-2" />
-            Save Changes
-          </Button>
+    <div className="space-y-8">
+      {/* Hero Section */}
+      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-brand-yellow/20 via-brand-yellow/10 to-brand-yellow/5 border border-brand-yellow/30 p-8">
+        <div className="absolute top-0 right-0 w-32 h-32 bg-brand-yellow/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-24 h-24 bg-brand-yellow/10 rounded-full blur-2xl" />
+        <div className="relative z-10 flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+          <div>
+            <h1 className="text-3xl font-bold tracking-tight text-brand-charcoal mb-2">My Profile</h1>
+            <p className="text-lg text-brand-charcoal/70">Manage your account and personalize your experience</p>
+          </div>
+          <div className="flex gap-3">
+            <Button variant="outline" onClick={() => setShowPasswordDialog(true)} className="bg-white/80 backdrop-blur-sm border-brand-yellow/30 hover:bg-white">
+              <Lock className="h-4 w-4 mr-2" />
+              Change Password
+            </Button>
+            <Button onClick={handleSave} className="bg-brand-charcoal text-white hover:bg-brand-charcoal/90 shadow-lg">
+              <User className="h-4 w-4 mr-2" />
+              Save Changes
+            </Button>
+          </div>
         </div>
       </div>
 
-      <div className="grid gap-6 md:grid-cols-2">
+      {/* Stats Cards */}
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {stats.map((stat, index) => {
+          const Icon = stat.icon;
+          return (
+            <Card key={index} className="group relative overflow-hidden rounded-2xl border-0 bg-gradient-to-br from-white to-gray-50 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+              <CardContent className="p-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-medium text-brand-charcoal/60 mb-1">{stat.label}</p>
+                    <p className={`text-xl font-bold ${
+                      stat.color === 'emerald' ? 'text-emerald-600' :
+                      stat.color === 'blue' ? 'text-blue-600' :
+                      stat.color === 'yellow' ? 'text-amber-600' :
+                      'text-purple-600'
+                    }`}>{stat.value}</p>
+                  </div>
+                  <div className={`h-12 w-12 rounded-xl flex items-center justify-center ${
+                    stat.color === 'emerald' ? 'bg-emerald-100 text-emerald-600' :
+                    stat.color === 'blue' ? 'bg-blue-100 text-blue-600' :
+                    stat.color === 'yellow' ? 'bg-amber-100 text-amber-600' :
+                    'bg-purple-100 text-purple-600'
+                  } transition-all group-hover:scale-110`}>
+                    <Icon className="h-6 w-6" />
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          );
+        })}
+      </div>
+
+      <div className="grid gap-8 lg:grid-cols-3">
         {/* Avatar Upload Card */}
-        <Card className="rounded-2xl border border-border/60 bg-card shadow-[0_10px_40px_-20px_rgba(0,0,0,0.1)]">
-          <CardHeader>
-            <CardTitle className="text-base font-semibold text-brand-charcoal">Profile Picture</CardTitle>
+        <Card className="lg:col-span-1 relative overflow-hidden rounded-2xl border-0 bg-gradient-to-br from-brand-yellow/10 to-brand-yellow/5 shadow-xl">
+          <div className="absolute top-0 right-0 w-20 h-20 bg-brand-yellow/10 rounded-full blur-2xl" />
+          <CardHeader className="relative z-10">
+            <CardTitle className="text-lg font-bold text-brand-charcoal flex items-center gap-2">
+              <Camera className="h-5 w-5" />
+              Profile Picture
+            </CardTitle>
           </CardHeader>
-          <CardContent className="space-y-4">
+          <CardContent className="relative z-10 space-y-6">
             <div className="flex flex-col items-center space-y-4">
-              <div className="relative">
+              <div className="relative group">
                 {profileData.avatar ? (
                   <img
                     src={profileData.avatar}
                     alt="Profile"
-                    className="h-24 w-24 rounded-full object-cover ring-2 ring-white"
+                    className="h-32 w-32 rounded-full object-cover ring-4 ring-white shadow-xl transition-all group-hover:scale-105"
                   />
                 ) : (
-                  <div className="h-24 w-24 rounded-full bg-brand-yellow text-3xl font-bold text-brand-charcoal flex items-center justify-center ring-2 ring-white">
+                  <div className="h-32 w-32 rounded-full bg-gradient-to-br from-brand-yellow to-brand-yellow/80 text-4xl font-bold text-brand-charcoal flex items-center justify-center ring-4 ring-white shadow-xl transition-all group-hover:scale-105">
                     {profileData.fullName.split(' ').map(n => n[0]).join('').toUpperCase()}
                   </div>
                 )}
-                <label className="absolute bottom-0 right-0 h-8 w-8 rounded-full bg-brand-charcoal text-white flex items-center justify-center cursor-pointer hover:bg-brand-charcoal/90 transition">
-                  <Camera className="h-4 w-4" />
+                <label className="absolute bottom-2 right-2 h-10 w-10 rounded-full bg-brand-charcoal text-white flex items-center justify-center cursor-pointer hover:bg-brand-charcoal/90 transition-all hover:scale-110 shadow-lg">
+                  <Camera className="h-5 w-5" />
                   <input
                     type="file"
                     accept="image/*"
@@ -86,10 +133,10 @@ function ProfilePage() {
                 </label>
               </div>
               <div className="text-center">
-                <p className="text-sm font-medium text-brand-charcoal">Upload Photo</p>
+                <p className="text-sm font-semibold text-brand-charcoal mb-1">Upload Photo</p>
                 <p className="text-xs text-brand-charcoal/60">JPG, PNG or GIF (Max 5MB)</p>
               </div>
-              <Button variant="outline" className="w-full" asChild>
+              <Button variant="outline" className="w-full bg-white/80 backdrop-blur-sm border-brand-yellow/30 hover:bg-white" asChild>
                 <label className="cursor-pointer">
                   <Upload className="h-4 w-4 mr-2" />
                   Choose File
@@ -106,46 +153,52 @@ function ProfilePage() {
         </Card>
 
         {/* Personal Information Card */}
-        <Card className="rounded-2xl border border-border/60 bg-card shadow-[0_10px_40px_-20px_rgba(0,0,0,0.1)]">
-          <CardHeader>
-            <CardTitle className="text-base font-semibold text-brand-charcoal">Personal Information</CardTitle>
+        <Card className="lg:col-span-2 relative overflow-hidden rounded-2xl border-0 bg-gradient-to-br from-white to-gray-50 shadow-xl">
+          <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-brand-yellow/10 to-transparent rounded-full blur-3xl" />
+          <CardHeader className="relative z-10">
+            <CardTitle className="text-lg font-bold text-brand-charcoal flex items-center gap-2">
+              <User className="h-5 w-5" />
+              Personal Information
+            </CardTitle>
           </CardHeader>
-          <CardContent className="space-y-4">
-            <div>
-              <Label htmlFor="fullName">Full Name</Label>
-              <Input
-                id="fullName"
-                value={profileData.fullName}
-                onChange={(e) => handleInputChange('fullName', e.target.value)}
-                className="mt-1"
-              />
-            </div>
+          <CardContent className="relative z-10 space-y-6">
+            <div className="grid gap-6 sm:grid-cols-2">
+              <div className="space-y-2">
+                <Label htmlFor="fullName" className="text-sm font-semibold text-brand-charcoal">Full Name</Label>
+                <Input
+                  id="fullName"
+                  value={profileData.fullName}
+                  onChange={(e) => handleInputChange('fullName', e.target.value)}
+                  className="h-11 rounded-xl border-brand-yellow/20 focus:border-brand-yellow focus:ring-brand-yellow/20"
+                />
+              </div>
 
-            <div>
-              <Label htmlFor="email" className="flex items-center gap-2">
-                <Mail className="h-4 w-4" />
-                Email
-              </Label>
-              <Input
-                id="email"
-                type="email"
-                value={profileData.email}
-                onChange={(e) => handleInputChange('email', e.target.value)}
-                className="mt-1"
-              />
-            </div>
+              <div className="space-y-2">
+                <Label htmlFor="email" className="text-sm font-semibold text-brand-charcoal flex items-center gap-2">
+                  <Mail className="h-4 w-4" />
+                  Email
+                </Label>
+                <Input
+                  id="email"
+                  type="email"
+                  value={profileData.email}
+                  onChange={(e) => handleInputChange('email', e.target.value)}
+                  className="h-11 rounded-xl border-brand-yellow/20 focus:border-brand-yellow focus:ring-brand-yellow/20"
+                />
+              </div>
 
-            <div>
-              <Label htmlFor="phone" className="flex items-center gap-2">
-                <Phone className="h-4 w-4" />
-                Phone
-              </Label>
-              <Input
-                id="phone"
-                value={profileData.phone}
-                onChange={(e) => handleInputChange('phone', e.target.value)}
-                className="mt-1"
-              />
+              <div className="space-y-2 sm:col-span-2">
+                <Label htmlFor="phone" className="text-sm font-semibold text-brand-charcoal flex items-center gap-2">
+                  <Phone className="h-4 w-4" />
+                  Phone
+                </Label>
+                <Input
+                  id="phone"
+                  value={profileData.phone}
+                  onChange={(e) => handleInputChange('phone', e.target.value)}
+                  className="h-11 rounded-xl border-brand-yellow/20 focus:border-brand-yellow focus:ring-brand-yellow/20"
+                />
+              </div>
             </div>
           </CardContent>
         </Card>
@@ -153,15 +206,18 @@ function ProfilePage() {
 
       {/* Password Change Dialog */}
       {showPasswordDialog && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-          <div className="w-full max-w-md mx-4 rounded-2xl border border-border/60 bg-card shadow-[0_10px_40px_-20px_rgba(0,0,0,0.1)] p-6">
-            <div className="flex items-center justify-between mb-6">
-              <h3 className="text-lg font-semibold text-brand-charcoal">Change Password</h3>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
+          <div className="w-full max-w-md mx-4 rounded-3xl border-0 bg-gradient-to-br from-white to-gray-50 shadow-2xl p-8">
+            <div className="flex items-center justify-between mb-8">
+              <h3 className="text-xl font-bold text-brand-charcoal flex items-center gap-2">
+                <Lock className="h-6 w-6" />
+                Change Password
+              </h3>
               <Button
                 variant="ghost"
                 size="sm"
                 onClick={() => setShowPasswordDialog(false)}
-                className="h-8 w-8 p-0"
+                className="h-10 w-10 p-0 rounded-full hover:bg-brand-yellow/10"
               >
                 ×
               </Button>

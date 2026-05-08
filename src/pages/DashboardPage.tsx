@@ -95,7 +95,7 @@ function DashboardPage() {
         <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
           <StatCard label="Total balance" value="$12,840.50" delta={4.2} icon={Wallet} accent="yellow" sub="vs last month" />
           <StatCard label="Income (Sep)" value="$4,200.00" delta={2.1} icon={TrendingUp} accent="green" sub="vs Aug" />
-          <StatCard label="Spending (Sep)" value="$2,520.10" delta={-3.4} icon={CreditCard} accent="violet" sub="vs Aug" />
+          <StatCard label="Expenses (Sep)" value="$2,520.10" delta={-3.4} icon={CreditCard} accent="violet" sub="vs Aug" />
           <StatCard label="Saved this month" value="$1,679.90" delta={12} icon={PiggyBank} accent="blue" sub="40% of income" />
         </div>
 

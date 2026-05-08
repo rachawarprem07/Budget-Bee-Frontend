@@ -28,13 +28,35 @@ const categoryIcon: Record<string, any> = {
 
 const mockTransactions: Transaction[] = [
   { id: "1", name: "Salary — Acme Inc", category: "Income", amount: 4200, date: "Today" },
-  { id: "2", name: "Blue Bottle Coffee", category: "Food & Drink", amount: -6.5, date: "Today" },
-  { id: "3", name: "Whole Foods", category: "Groceries", amount: -82.3, date: "Yesterday" },
-  { id: "4", name: "Uber", category: "Transport", amount: -14.2, date: "Yesterday" },
-  { id: "5", name: "Rent — September", category: "Housing", amount: -1200, date: "Sep 1" },
-  { id: "6", name: "Spotify", category: "Subscriptions", amount: -9.99, date: "Aug 30" },
-  { id: "7", name: "Netflix", category: "Subscriptions", amount: -15.99, date: "Aug 30" },
-  { id: "8", name: "Amazon", category: "Shopping", amount: -45.67, date: "Aug 29" },
+  { id: "2", name: "Freelance Project", category: "Income", amount: 850, date: "Today" },
+  { id: "3", name: "Blue Bottle Coffee", category: "Food & Drink", amount: -6.5, date: "Today" },
+  { id: "4", name: "Whole Foods", category: "Groceries", amount: -82.3, date: "Yesterday" },
+  { id: "5", name: "Uber", category: "Transport", amount: -14.2, date: "Yesterday" },
+  { id: "6", name: "Rent — September", category: "Housing", amount: -1200, date: "Sep 1" },
+  { id: "7", name: "Electricity Bill", category: "Housing", amount: -145.50, date: "Sep 1" },
+  { id: "8", name: "Spotify", category: "Subscriptions", amount: -9.99, date: "Aug 30" },
+  { id: "9", name: "Netflix", category: "Subscriptions", amount: -15.99, date: "Aug 30" },
+  { id: "10", name: "Amazon", category: "Shopping", amount: -45.67, date: "Aug 29" },
+  { id: "11", name: "Target", category: "Shopping", amount: -67.89, date: "Aug 28" },
+  { id: "12", name: "Gas Station", category: "Transport", amount: -42.50, date: "Aug 27" },
+  { id: "13", name: "Starbucks", category: "Food & Drink", amount: -8.75, date: "Aug 27" },
+  { id: "14", name: "Gym Membership", category: "Subscriptions", amount: -29.99, date: "Aug 26" },
+  { id: "15", name: "Restaurant Dinner", category: "Food & Drink", amount: -85.20, date: "Aug 25" },
+  { id: "16", name: "Internet Bill", category: "Housing", amount: -79.99, date: "Aug 24" },
+  { id: "17", name: "Clothing Store", category: "Shopping", amount: -123.45, date: "Aug 23" },
+  { id: "18", name: "Grocery Shopping", category: "Groceries", amount: -56.78, date: "Aug 22" },
+  { id: "19", name: "Uber Eats", category: "Food & Drink", amount: -23.45, date: "Aug 21" },
+  { id: "20", name: "Parking Fee", category: "Transport", amount: -12.00, date: "Aug 20" },
+  { id: "21", name: "Coffee Shop", category: "Food & Drink", amount: -5.50, date: "Aug 19" },
+  { id: "22", name: "Phone Bill", category: "Housing", amount: -65.00, date: "Aug 18" },
+  { id: "23", name: "Apple Store", category: "Shopping", amount: -299.99, date: "Aug 17" },
+  { id: "24", name: "Lyft", category: "Transport", amount: -18.75, date: "Aug 16" },
+  { id: "25", name: "Grocery Market", category: "Groceries", amount: -78.92, date: "Aug 15" },
+  { id: "26", name: "Movie Tickets", category: "Entertainment", amount: -32.00, date: "Aug 14" },
+  { id: "27", name: "Concert Tickets", category: "Entertainment", amount: -125.00, date: "Aug 13" },
+  { id: "28", name: "Book Store", category: "Shopping", amount: -45.00, date: "Aug 12" },
+  { id: "29", name: "Pharmacy", category: "Groceries", amount: -28.50, date: "Aug 11" },
+  { id: "30", name: "Hotel Booking", category: "Travel", amount: -250.00, date: "Aug 10" },
 ];
 
 const categories = Object.keys(categoryIcon);
@@ -56,7 +78,7 @@ function TransactionsPage() {
       const matchesSearch = transaction.name.toLowerCase().includes(searchTerm.toLowerCase());
       const matchesCategory = selectedCategory === "all" || transaction.category === selectedCategory;
       const matchesArchived = showArchived ? transaction.archived === true : !transaction.archived;
-      const matchesPasscode = isAuthenticated && (!passcode || transaction.id.toString().slice(-4) === passcode);
+      const matchesPasscode = showArchived ? isAuthenticated && (!passcode || transaction.id.toString().slice(-4) === passcode) : true;
       return matchesSearch && matchesCategory && matchesArchived && matchesPasscode;
     });
   }, [searchTerm, selectedCategory, showArchived, passcode, isAuthenticated]);
@@ -210,37 +232,37 @@ function TransactionsPage() {
 
       {/* Summary Cards */}
       <div className="grid gap-4 sm:grid-cols-3">
-        <div className="rounded-2xl border border-border/60 bg-card p-5 shadow-[0_10px_40px_-20px_rgba(0,0,0,0.1)]">
+        <div className="rounded-2xl border border-emerald-200 bg-gradient-to-br from-emerald-50 to-emerald-100 p-5 shadow-[0_10px_40px_-20px_rgba(16,185,129,0.2)]">
           <div className="flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-emerald-100">
-              <TrendingUp className="h-4 w-4 text-emerald-600" />
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-500 shadow-lg shadow-emerald-500/30">
+              <TrendingUp className="h-5 w-5 text-white" />
             </div>
             <div>
-              <p className="text-xs text-brand-charcoal/60">Total Income</p>
-              <p className="text-lg font-semibold text-emerald-600">+${totalIncome.toFixed(2)}</p>
+              <p className="text-xs font-medium text-emerald-700">Total Income</p>
+              <p className="text-xl font-bold text-emerald-600">+${totalIncome.toFixed(2)}</p>
             </div>
           </div>
         </div>
-        <div className="rounded-2xl border border-border/60 bg-card p-5 shadow-[0_10px_40px_-20px_rgba(0,0,0,0.1)]">
+        <div className="rounded-2xl border border-red-200 bg-gradient-to-br from-red-50 to-red-100 p-5 shadow-[0_10px_40px_-20px_rgba(239,68,68,0.2)]">
           <div className="flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-red-100">
-              <TrendingDown className="h-4 w-4 text-red-600" />
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-red-500 shadow-lg shadow-red-500/30">
+              <TrendingDown className="h-5 w-5 text-white" />
             </div>
             <div>
-              <p className="text-xs text-brand-charcoal/60">Total Expenses</p>
-              <p className="text-lg font-semibold text-red-600">-${totalExpenses.toFixed(2)}</p>
+              <p className="text-xs font-medium text-red-700">Total Expenses</p>
+              <p className="text-xl font-bold text-red-600">-${totalExpenses.toFixed(2)}</p>
             </div>
           </div>
         </div>
-        <div className="rounded-2xl border border-border/60 bg-card p-5 shadow-[0_10px_40px_-20px_rgba(0,0,0,0.1)]">
+        <div className="rounded-2xl border border-violet-200 bg-gradient-to-br from-violet-50 to-violet-100 p-5 shadow-[0_10px_40px_-20px_rgba(139,92,246,0.2)]">
           <div className="flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-brand-yellow/20">
-              <Wallet className="h-4 w-4 text-brand-charcoal" />
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-violet-500 shadow-lg shadow-violet-500/30">
+              <Wallet className="h-5 w-5 text-white" />
             </div>
             <div>
-              <p className="text-xs text-brand-charcoal/60">Net Balance</p>
+              <p className="text-xs font-medium text-violet-700">Net Balance</p>
               <p className={cn(
-                "text-lg font-semibold",
+                "text-xl font-bold",
                 netBalance >= 0 ? "text-emerald-600" : "text-red-600"
               )}>
                 {netBalance >= 0 ? "+" : "-"}${Math.abs(netBalance).toFixed(2)}
@@ -285,51 +307,71 @@ function TransactionsPage() {
       </div>
 
       {/* Transactions List */}
-      <div className="rounded-2xl border border-border/60 bg-card shadow-[0_10px_40px_-20px_rgba(0,0,0,0.1)]">
-        <div className="p-5">
-          <h3 className="text-base font-semibold text-brand-charcoal mb-4">Recent Transactions</h3>
+      <div className="rounded-2xl border border-border/60 bg-gradient-to-br from-white to-gray-50 shadow-[0_10px_40px_-20px_rgba(0,0,0,0.1)]">
+        <div className="p-6">
+          <h3 className="text-lg font-bold text-brand-charcoal mb-6">Recent Transactions</h3>
           {filteredTransactions.length === 0 ? (
-            <p className="text-center text-sm text-brand-charcoal/60 py-8">
-              No transactions found matching your criteria.
-            </p>
+            <div className="text-center py-12">
+              <div className="mx-auto w-16 h-16 rounded-full bg-muted flex items-center justify-center mb-4">
+                <Wallet className="h-8 w-8 text-brand-charcoal/40" />
+              </div>
+              <p className="text-sm text-brand-charcoal/60">No transactions found matching your criteria.</p>
+            </div>
           ) : (
-            <ul className="divide-y divide-border/60">
+            <ul className="space-y-2">
               {filteredTransactions.map((transaction) => {
                 const Icon = categoryIcon[transaction.category] || Wallet;
                 const isIncome = transaction.amount > 0;
+                const categoryColors: Record<string, { bg: string; icon: string; ring: string }> = {
+                  Income: { bg: "bg-emerald-50", icon: "bg-emerald-500", ring: "ring-emerald-200" },
+                  "Food & Drink": { bg: "bg-amber-50", icon: "bg-amber-500", ring: "ring-amber-200" },
+                  Groceries: { bg: "bg-blue-50", icon: "bg-blue-500", ring: "ring-blue-200" },
+                  Transport: { bg: "bg-purple-50", icon: "bg-purple-500", ring: "ring-purple-200" },
+                  Housing: { bg: "bg-rose-50", icon: "bg-rose-500", ring: "ring-rose-200" },
+                  Subscriptions: { bg: "bg-violet-50", icon: "bg-violet-500", ring: "ring-violet-200" },
+                  Shopping: { bg: "bg-pink-50", icon: "bg-pink-500", ring: "ring-pink-200" },
+                  Entertainment: { bg: "bg-cyan-50", icon: "bg-cyan-500", ring: "ring-cyan-200" },
+                  Other: { bg: "bg-slate-50", icon: "bg-slate-500", ring: "ring-slate-200" },
+                };
+                const colors = categoryColors[transaction.category] || categoryColors.Other;
                 
                 return (
-                  <li key={transaction.id} className="py-4">
-                    <div className="flex items-center justify-between gap-2">
-                      <div className="flex items-center gap-3 min-w-0 flex-1">
-                        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-muted text-brand-charcoal/80 ring-1 ring-border/60 flex-shrink-0">
-                          <Icon className="h-5 w-5" />
-                        </div>
-                        <div className="min-w-0 flex-1">
-                          <p className="text-sm font-medium text-brand-charcoal truncate">{transaction.name}</p>
-                          <p className="text-xs text-brand-charcoal/55 truncate">
-                            {transaction.category} · {transaction.date}
-                          </p>
-                        </div>
+                  <li key={transaction.id} className="group flex items-center justify-between p-3 rounded-xl bg-white border border-border/40 hover:border-emerald-300 hover:shadow-md hover:shadow-emerald-5 transition-all duration-200">
+                    <div className="flex items-center gap-3 min-w-0 flex-1">
+                      <div className={cn(
+                        "flex h-9 w-9 items-center justify-center rounded-xl ring-1 shadow-sm transition-all group-hover:scale-110 flex-shrink-0",
+                        colors.bg,
+                        colors.icon,
+                        "text-white",
+                        colors.ring
+                      )}>
+                        <Icon className="h-5 w-5" />
                       </div>
-                      <div className="flex items-center gap-2 flex-shrink-0">
-                        <span
-                          className={cn(
-                            "text-sm font-semibold tabular-nums",
-                            isIncome ? "text-emerald-600" : "text-brand-charcoal"
-                          )}
+                      <div className="min-w-0 flex-1">
+                        <p className="text-sm font-semibold text-brand-charcoal truncate">{transaction.name}</p>
+                        <p className="text-xs text-brand-charcoal/60 mt-0.5 truncate">
+                          {transaction.category} · {transaction.date}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2 flex-shrink-0">
+                      <span
+                        className={cn(
+                          "text-xs font-bold tabular-nums px-2 py-1 rounded-lg",
+                          isIncome ? "bg-emerald-50 text-emerald-600" : "bg-red-50 text-red-600"
+                        )}
+                      >
+                        {isIncome ? "+" : "-"}${Math.abs(transaction.amount).toFixed(2)}
+                      </span>
+                      <div className="relative">
+                        <button
+                          onClick={() => setActiveMenu(activeMenu === transaction.id ? null : transaction.id)}
+                          className="p-1.5 rounded-full hover:bg-brand-yellow/10 transition"
                         >
-                          {isIncome ? "+" : "-"}${Math.abs(transaction.amount).toFixed(2)}
-                        </span>
-                        <div className="relative">
-                          <button
-                            onClick={() => setActiveMenu(activeMenu === transaction.id ? null : transaction.id)}
-                            className="p-1 rounded-full hover:bg-brand-yellow/10 transition"
-                          >
-                            <MoreVertical className="h-4 w-4 text-brand-charcoal/60" />
-                          </button>
-                          {activeMenu === transaction.id && (
-                            <div className="absolute right-0 top-full mt-1 w-40 rounded-lg border border-border/60 bg-background shadow-lg z-10">
+                          <MoreVertical className="h-4 w-4 text-brand-charcoal/60" />
+                        </button>
+                        {activeMenu === transaction.id && (
+                          <div className="absolute right-0 top-full mt-1 w-40 rounded-lg border border-border/60 bg-background shadow-lg z-10">
                               <button
                                 onClick={() => handleArchiveTransaction(transaction.id)}
                                 className="flex w-full items-center gap-3 px-3 py-2 text-sm text-brand-charcoal transition hover:bg-brand-yellow/10"
@@ -354,7 +396,6 @@ function TransactionsPage() {
                             </div>
                           )}
                         </div>
-                      </div>
                     </div>
                   </li>
                 );

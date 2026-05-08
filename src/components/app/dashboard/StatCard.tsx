@@ -11,28 +11,65 @@ type Props = {
   sub?: string;
 };
 
-const accents: Record<NonNullable<Props["accent"]>, string> = {
-  yellow: "bg-brand-yellow/20 text-brand-charcoal ring-brand-yellow/40",
-  green: "bg-emerald-100 text-emerald-700 ring-emerald-200",
-  violet: "bg-violet-100 text-violet-700 ring-violet-200",
-  blue: "bg-sky-100 text-sky-700 ring-sky-200",
+const cardStyles: Record<NonNullable<Props["accent"]>, { bg: string; border: string; iconBg: string; iconText: string; shadow: string; labelColor: string }> = {
+  yellow: {
+    bg: "bg-gradient-to-br from-amber-50 to-amber-100",
+    border: "border-amber-200",
+    iconBg: "bg-amber-500",
+    iconText: "text-white",
+    shadow: "shadow-[0_10px_40px_-20px_rgba(245,158,11,0.2)]",
+    labelColor: "text-amber-700"
+  },
+  green: {
+    bg: "bg-gradient-to-br from-emerald-50 to-emerald-100",
+    border: "border-emerald-200",
+    iconBg: "bg-emerald-500",
+    iconText: "text-white",
+    shadow: "shadow-[0_10px_40px_-20px_rgba(16,185,129,0.2)]",
+    labelColor: "text-emerald-700"
+  },
+  violet: {
+    bg: "bg-gradient-to-br from-violet-50 to-violet-100",
+    border: "border-violet-200",
+    iconBg: "bg-violet-500",
+    iconText: "text-white",
+    shadow: "shadow-[0_10px_40px_-20px_rgba(139,92,246,0.2)]",
+    labelColor: "text-violet-700"
+  },
+  blue: {
+    bg: "bg-gradient-to-br from-sky-50 to-sky-100",
+    border: "border-sky-200",
+    iconBg: "bg-sky-500",
+    iconText: "text-white",
+    shadow: "shadow-[0_10px_40px_-20px_rgba(14,165,233,0.2)]",
+    labelColor: "text-sky-700"
+  },
 };
 
 export function StatCard({ label, value, delta, icon: Icon, accent = "yellow", sub }: Props) {
   const positive = delta >= 0;
+  const style = cardStyles[accent];
   return (
-    <div className="group relative overflow-hidden rounded-2xl border border-border/60 bg-card p-5 shadow-[0_10px_40px_-20px_rgba(0,0,0,0.1)] transition hover:-translate-y-0.5 hover:shadow-[0_18px_50px_-20px_rgba(0,0,0,0.18)]">
+    <div className={cn(
+      "group relative overflow-hidden rounded-2xl border p-5 transition hover:-translate-y-0.5",
+      style.bg,
+      style.border,
+      style.shadow,
+      "hover:shadow-[0_18px_50px_-20px_rgba(0,0,0,0.18)]"
+    )}>
       <div className="flex items-start justify-between">
         <div>
-          <p className="text-xs font-medium uppercase tracking-wide text-brand-charcoal/50">
+          <p className={cn("text-xs font-medium uppercase tracking-wide", style.labelColor)}>
             {label}
           </p>
           <p className="mt-2 text-2xl font-bold tracking-tight text-brand-charcoal">{value}</p>
         </div>
         <div
           className={cn(
-            "flex h-10 w-10 items-center justify-center rounded-xl ring-1",
-            accents[accent],
+            "flex h-10 w-10 items-center justify-center rounded-xl shadow-lg",
+            style.iconBg,
+            style.iconText,
+            `shadow-${style.iconBg.split('-')[1]}-500/30`
           )}
         >
           <Icon className="h-5 w-5" />
@@ -42,18 +79,14 @@ export function StatCard({ label, value, delta, icon: Icon, accent = "yellow", s
         <span
           className={cn(
             "inline-flex items-center gap-1 rounded-full px-2 py-0.5 font-semibold",
-            positive ? "bg-emerald-50 text-emerald-700" : "bg-rose-50 text-rose-700",
+            positive ? "bg-emerald-500 text-white" : "bg-rose-500 text-white",
           )}
         >
           {positive ? <ArrowUpRight className="h-3 w-3" /> : <ArrowDownRight className="h-3 w-3" />}
           {Math.abs(delta)}%
         </span>
-        {sub && <span className="text-brand-charcoal/50">{sub}</span>}
+        {sub && <span className="text-brand-charcoal/60">{sub}</span>}
       </div>
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -right-10 -bottom-10 h-32 w-32 rounded-full bg-brand-yellow/10 blur-2xl transition group-hover:bg-brand-yellow/20"
-      />
     </div>
   );
 }

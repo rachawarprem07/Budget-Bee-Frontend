@@ -132,36 +132,36 @@ function BudgetsPage() {
 
       {/* Summary Cards */}
       <div className="grid gap-4 sm:grid-cols-3">
-        <div className="rounded-2xl border border-border/60 bg-card p-5 shadow-[0_10px_40px_-20px_rgba(0,0,0,0.1)]">
+        <div className="rounded-2xl border border-blue-200 bg-gradient-to-br from-blue-50 to-blue-100 p-5 shadow-[0_10px_40px_-20px_rgba(59,130,246,0.2)]">
           <div className="flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-brand-yellow/20">
-              <Wallet className="h-4 w-4 text-brand-charcoal" />
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-500 shadow-lg shadow-blue-500/30">
+              <Wallet className="h-5 w-5 text-white" />
             </div>
             <div>
-              <p className="text-xs text-brand-charcoal/60">Total Budgeted</p>
-              <p className="text-lg font-semibold text-brand-charcoal">${totalBudgeted.toFixed(2)}</p>
+              <p className="text-xs font-medium text-blue-700">Total Budgeted</p>
+              <p className="text-xl font-bold text-blue-600">${totalBudgeted.toFixed(2)}</p>
             </div>
           </div>
         </div>
-        <div className="rounded-2xl border border-border/60 bg-card p-5 shadow-[0_10px_40px_-20px_rgba(0,0,0,0.1)]">
+        <div className="rounded-2xl border border-amber-200 bg-gradient-to-br from-amber-50 to-amber-100 p-5 shadow-[0_10px_40px_-20px_rgba(245,158,11,0.2)]">
           <div className="flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-emerald-100">
-              <TrendingUp className="h-4 w-4 text-emerald-600" />
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-500 shadow-lg shadow-amber-500/30">
+              <TrendingUp className="h-5 w-5 text-white" />
             </div>
             <div>
-              <p className="text-xs text-brand-charcoal/60">Total Spent</p>
-              <p className="text-lg font-semibold text-emerald-600">${totalSpent.toFixed(2)}</p>
+              <p className="text-xs font-medium text-amber-700">Total Spent</p>
+              <p className="text-xl font-bold text-amber-600">${totalSpent.toFixed(2)}</p>
             </div>
           </div>
         </div>
-        <div className="rounded-2xl border border-border/60 bg-card p-5 shadow-[0_10px_40px_-20px_rgba(0,0,0,0.1)]">
+        <div className="rounded-2xl border border-teal-200 bg-gradient-to-br from-teal-50 to-teal-100 p-5 shadow-[0_10px_40px_-20px_rgba(20,184,166,0.2)]">
           <div className="flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-red-100">
-              <TrendingDown className="h-4 w-4 text-red-600" />
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-teal-500 shadow-lg shadow-teal-500/30">
+              <TrendingDown className="h-5 w-5 text-white" />
             </div>
             <div>
-              <p className="text-xs text-brand-charcoal/60">Remaining</p>
-              <p className="text-lg font-semibold text-red-600">${totalRemaining.toFixed(2)}</p>
+              <p className="text-xs font-medium text-teal-700">Remaining</p>
+              <p className="text-xl font-bold text-teal-600">${totalRemaining.toFixed(2)}</p>
             </div>
           </div>
         </div>
@@ -193,45 +193,59 @@ function BudgetsPage() {
       </div>
 
       {/* Budgets List */}
-      <div className="rounded-2xl border border-border/60 bg-card shadow-[0_10px_40px_-20px_rgba(0,0,0,0.1)]">
-        <div className="p-5">
-          <h3 className="text-base font-semibold text-brand-charcoal mb-4">Your Budgets</h3>
+      <div className="rounded-2xl border border-border/60 bg-gradient-to-br from-white to-gray-50 shadow-[0_10px_40px_-20px_rgba(0,0,0,0.1)]">
+        <div className="p-6">
+          <h3 className="text-lg font-bold text-brand-charcoal mb-6">Your Budgets</h3>
           {filteredBudgets.length === 0 ? (
-            <p className="text-center text-sm text-brand-charcoal/60 py-8">
-              No budgets found matching your criteria.
-            </p>
+            <div className="text-center py-12">
+              <div className="mx-auto w-16 h-16 rounded-full bg-muted flex items-center justify-center mb-4">
+                <Wallet className="h-8 w-8 text-brand-charcoal/40" />
+              </div>
+              <p className="text-sm text-brand-charcoal/60">No budgets found matching your criteria.</p>
+            </div>
           ) : (
-            <ul className="divide-y divide-border/60">
+            <ul className="space-y-2">
               {filteredBudgets.map((budget) => {
                 const Icon = categoryIcon[budget.category] || Wallet;
                 const percentage = (budget.spent / budget.budget) * 100;
                 
                 return (
-                  <li key={budget.id} className="py-4">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-muted text-brand-charcoal/80 ring-1 ring-border/60">
-                          <Icon className="h-5 w-5" />
-                        </div>
-                        <div>
-                          <p className="text-sm font-medium text-brand-charcoal">{budget.name}</p>
-                          <p className="text-xs text-brand-charcoal/55">{budget.category}</p>
-                        </div>
+                  <li key={budget.id} className="group flex items-center justify-between p-3 rounded-xl bg-white border border-border/40 hover:border-emerald-300 hover:shadow-md hover:shadow-emerald-5 transition-all duration-200">
+                    <div className="flex items-center gap-3">
+                      <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600 ring-1 ring-emerald-200 shadow-sm transition-all group-hover:scale-110">
+                        <Icon className="h-5 w-5" />
                       </div>
-                      <div className="text-right">
-                        <span className="text-sm font-semibold text-brand-charcoal">
+                      <div>
+                        <p className="text-sm font-semibold text-brand-charcoal">{budget.name}</p>
+                        <p className="text-xs text-brand-charcoal/60 mt-0.5">{budget.category}</p>
+                      </div>
+                    </div>
+                    <div className="text-right flex-1 ml-4">
+                      <div className="mb-1">
+                        <span className="text-xs font-bold text-brand-charcoal">
                           ${budget.spent.toFixed(2)} / ${budget.budget.toFixed(2)}
                         </span>
-                        <div className="w-full bg-muted rounded-full h-2">
-                          <div
-                            className={cn(
-                              "h-2 rounded-full transition-all duration-300",
-                              percentage >= 100 ? "bg-red-500" : percentage >= 80 ? "bg-brand-yellow/50" : "bg-emerald-500"
-                            )}
-                            style={{ width: `${Math.min(percentage, 100)}%` }}
-                          />
-                        </div>
                       </div>
+                      <div className="flex items-center gap-1 justify-end">
+                        {[...Array(5)].map((_, i) => (
+                          <div
+                            key={i}
+                            className={cn(
+                              "w-2 h-2 rounded-full transition-all duration-300",
+                              i < Math.floor(percentage / 20)
+                                ? percentage >= 100
+                                  ? "bg-red-400"
+                                  : percentage >= 80
+                                  ? "bg-amber-400"
+                                  : "bg-emerald-400"
+                                : "bg-gray-200"
+                            )}
+                          />
+                        ))}
+                      </div>
+                      <p className="text-xs font-semibold text-brand-charcoal/70 mt-1">
+                        {percentage.toFixed(0)}% used
+                      </p>
                     </div>
                   </li>
                 );

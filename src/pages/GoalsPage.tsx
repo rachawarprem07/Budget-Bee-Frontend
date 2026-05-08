@@ -110,36 +110,36 @@ function GoalsPage() {
 
       {/* Summary Cards */}
       <div className="grid gap-4 sm:grid-cols-3">
-        <div className="rounded-2xl border border-border/60 bg-card p-5 shadow-[0_10px_40px_-20px_rgba(0,0,0,0.1)]">
+        <div className="rounded-2xl border border-indigo-200 bg-gradient-to-br from-indigo-50 to-indigo-100 p-5 shadow-[0_10px_40px_-20px_rgba(99,102,241,0.2)]">
           <div className="flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-brand-yellow/20">
-              <Target className="h-4 w-4 text-brand-charcoal" />
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-500 shadow-lg shadow-indigo-500/30">
+              <Target className="h-5 w-5 text-white" />
             </div>
             <div>
-              <p className="text-xs text-brand-charcoal/60">Total Target</p>
-              <p className="text-lg font-semibold text-brand-charcoal">${totalTarget.toFixed(2)}</p>
+              <p className="text-xs font-medium text-indigo-700">Active Goals</p>
+              <p className="text-xl font-bold text-indigo-600">{activeGoals}</p>
             </div>
           </div>
         </div>
-        <div className="rounded-2xl border border-border/60 bg-card p-5 shadow-[0_10px_40px_-20px_rgba(0,0,0,0.1)]">
+        <div className="rounded-2xl border border-rose-200 bg-gradient-to-br from-rose-50 to-rose-100 p-5 shadow-[0_10px_40px_-20px_rgba(244,63,94,0.2)]">
           <div className="flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-emerald-100">
-              <TrendingUp className="h-4 w-4 text-emerald-600" />
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-rose-500 shadow-lg shadow-rose-500/30">
+              <TrendingUp className="h-5 w-5 text-white" />
             </div>
             <div>
-              <p className="text-xs text-brand-charcoal/60">Current Progress</p>
-              <p className="text-lg font-semibold text-emerald-600">${totalCurrent.toFixed(2)}</p>
+              <p className="text-xs font-medium text-rose-700">Completed</p>
+              <p className="text-xl font-bold text-rose-600">{completedGoals}</p>
             </div>
           </div>
         </div>
-        <div className="rounded-2xl border border-border/60 bg-card p-5 shadow-[0_10px_40px_-20px_rgba(0,0,0,0.1)]">
+        <div className="rounded-2xl border border-cyan-200 bg-gradient-to-br from-cyan-50 to-cyan-100 p-5 shadow-[0_10px_40px_-20px_rgba(6,182,212,0.2)]">
           <div className="flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-red-100">
-              <TrendingDown className="h-4 w-4 text-red-600" />
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-500 shadow-lg shadow-cyan-500/30">
+              <Sparkles className="h-5 w-5 text-white" />
             </div>
             <div>
-              <p className="text-xs text-brand-charcoal/60">Remaining</p>
-              <p className="text-lg font-semibold text-red-600">${totalRemaining.toFixed(2)}</p>
+              <p className="text-xs font-medium text-cyan-700">Total Target</p>
+              <p className="text-xl font-bold text-cyan-600">${totalTarget.toFixed(2)}</p>
             </div>
           </div>
         </div>
@@ -171,68 +171,78 @@ function GoalsPage() {
       </div>
 
       {/* Goals List */}
-      <div className="rounded-2xl border border-border/60 bg-card shadow-[0_10px_40px_-20px_rgba(0,0,0,0.1)]">
-        <div className="p-5">
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="text-base font-semibold text-brand-charcoal">Your Goals</h3>
+      <div className="rounded-2xl border border-border/60 bg-gradient-to-br from-white to-gray-50 shadow-[0_10px_40px_-20px_rgba(0,0,0,0.1)]">
+        <div className="p-6">
+          <div className="flex items-center justify-between mb-6">
+            <h3 className="text-lg font-bold text-brand-charcoal">Your Goals</h3>
             <div className="flex gap-4">
-              <div className="flex items-center gap-2">
-                <div className="h-3 w-3 rounded-full bg-emerald-500"></div>
-                <span className="text-sm text-brand-charcoal/60">{activeGoals} Active</span>
+              <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 ring-1 ring-emerald-200">
+                <div className="h-2 w-2 rounded-full bg-emerald-500"></div>
+                <span className="text-sm font-semibold text-emerald-700">{activeGoals} Active</span>
               </div>
-              <div className="flex items-center gap-2">
-                <div className="h-3 w-3 rounded-full bg-blue-500"></div>
-                <span className="text-sm text-brand-charcoal/60">{completedGoals} Completed</span>
+              <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 ring-1 ring-blue-200">
+                <div className="h-2 w-2 rounded-full bg-blue-500"></div>
+                <span className="text-sm font-semibold text-blue-700">{completedGoals} Completed</span>
               </div>
             </div>
           </div>
           {filteredGoals.length === 0 ? (
-            <p className="text-center text-sm text-brand-charcoal/60 py-8">
-              No goals found matching your criteria.
-            </p>
+            <div className="text-center py-12">
+              <div className="mx-auto w-16 h-16 rounded-full bg-muted flex items-center justify-center mb-4">
+                <Target className="h-8 w-8 text-brand-charcoal/40" />
+              </div>
+              <p className="text-sm text-brand-charcoal/60">No goals found matching your criteria.</p>
+            </div>
           ) : (
-            <ul className="divide-y divide-border/60">
+            <ul className="space-y-2">
               {filteredGoals.map((goal) => {
                 const Icon = categoryIcon[goal.category] || Target;
                 const progress = (goal.current / goal.target) * 100;
                 const isActive = goal.status === "active";
                 
                 return (
-                  <li key={goal.id} className="py-4">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-muted text-brand-charcoal/80 ring-1 ring-border/60">
-                          <Icon className="h-5 w-5" />
-                        </div>
-                        <div>
-                          <p className="text-sm font-medium text-brand-charcoal">{goal.name}</p>
-                          <p className="text-xs text-brand-charcoal/55">
-                            {goal.category} · {goal.deadline}
-                          </p>
-                        </div>
+                  <li key={goal.id} className="group flex items-center justify-between p-3 rounded-xl bg-white border border-border/40 hover:border-rose-300 hover:shadow-md hover:shadow-rose-5 transition-all duration-200">
+                    <div className="flex items-center gap-3">
+                      <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-rose-50 text-rose-600 ring-1 ring-rose-200 shadow-sm transition-all group-hover:scale-110">
+                        <Icon className="h-5 w-5" />
                       </div>
-                      <div className="text-right">
-                        <div className="mb-2">
-                          <span className={cn(
-                            "text-sm font-semibold",
-                            isActive ? "text-emerald-600" : "text-blue-600"
-                          )}>
-                            {goal.status}
-                          </span>
-                        </div>
-                        <div className="w-full bg-muted rounded-full h-2">
-                          <div 
-                            className={cn(
-                              "h-2 rounded-full transition-all duration-300",
-                              progress >= 100 ? "bg-emerald-500" : "bg-brand-yellow/50"
-                            )}
-                            style={{ width: `${Math.min(progress, 100)}%` }}
-                          />
-                        </div>
-                        <p className="text-xs text-brand-charcoal/60 mt-1">
-                          ${goal.current.toFixed(2)} / ${goal.target.toFixed(2)}
+                      <div>
+                        <p className="text-sm font-semibold text-brand-charcoal">{goal.name}</p>
+                        <p className="text-xs text-brand-charcoal/60 mt-0.5">
+                          {goal.category} · {goal.deadline}
                         </p>
                       </div>
+                    </div>
+                    <div className="text-right flex-1 ml-4">
+                      <div className="mb-1">
+                        <span className={cn(
+                          "inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-semibold",
+                          isActive ? "bg-emerald-100 text-emerald-700" : "bg-blue-100 text-blue-700"
+                        )}>
+                          {isActive ? <Target className="h-3 w-3" /> : <Sparkles className="h-3 w-3" />}
+                          {goal.status}
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-1 justify-end">
+                        {[...Array(5)].map((_, i) => (
+                          <div
+                            key={i}
+                            className={cn(
+                              "w-2 h-2 rounded-full transition-all duration-300",
+                              i < Math.floor(progress / 20)
+                                ? progress >= 100
+                                  ? "bg-emerald-400"
+                                  : progress >= 75
+                                  ? "bg-rose-400"
+                                  : "bg-rose-300"
+                                : "bg-gray-200"
+                            )}
+                          />
+                        ))}
+                      </div>
+                      <p className="text-xs font-semibold text-brand-charcoal/70 mt-1">
+                        ${goal.current.toFixed(2)} / ${goal.target.toFixed(2)}
+                      </p>
                     </div>
                   </li>
                 );
