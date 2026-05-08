@@ -14,6 +14,7 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 import { Logo } from "@/components/landing/Logo";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const items = [
   { title: "Dashboard", url: "/app/dashboard", icon: LayoutDashboard },
@@ -24,12 +25,20 @@ const items = [
 ] as const;
 
 export function AppSidebar({ onProfileClick }: { onProfileClick?: () => void }) {
-  const { state } = useSidebar();
+  const { state, toggleSidebar } = useSidebar();
   const collapsed = state === "collapsed";
   const currentPath = useLocation().pathname;
+  const isMobile = useIsMobile();
 
   const handleLogout = () => {
     // Add logout logic here
+  };
+
+  const handleNavigationClick = () => {
+    // Auto-collapse sidebar on mobile when navigation item is clicked
+    if (isMobile && !collapsed) {
+      toggleSidebar();
+    }
   };
 
   return (
@@ -67,7 +76,7 @@ export function AppSidebar({ onProfileClick }: { onProfileClick?: () => void }) 
                       }
                       size="lg"
                     >
-                      <Link to={item.url} className="flex items-center gap-4">
+                      <Link to={item.url} className="flex items-center gap-4" onClick={handleNavigationClick}>
                         <item.icon className="h-5 w-5 shrink-0" />
                         {!collapsed && <span className="font-semibold text-base">{item.title}</span>}
                       </Link>
