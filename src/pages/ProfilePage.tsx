@@ -38,27 +38,27 @@ function ProfilePage() {
   const stats = [
     { label: "Account Status", value: "Active", icon: Shield, color: "emerald" },
     { label: "Member Since", value: "Jan 2024", icon: Award, color: "blue" },
-    { label: "Total Savings", value: "$12,450", icon: TrendingUp, color: "yellow" },
+    { label: "Total Savings", value: "₹10,45,000", icon: TrendingUp, color: "yellow" },
     { label: "Quick Actions", value: "3", icon: Zap, color: "purple" },
   ];
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 sm:space-y-8">
       {/* Hero Section */}
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-brand-yellow/20 via-brand-yellow/10 to-brand-yellow/5 border border-brand-yellow/30 p-8">
-        <div className="absolute top-0 right-0 w-32 h-32 bg-brand-yellow/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 left-0 w-24 h-24 bg-brand-yellow/10 rounded-full blur-2xl" />
-        <div className="relative z-10 flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+      <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl bg-gradient-to-br from-brand-yellow/20 via-brand-yellow/10 to-brand-yellow/5 border border-brand-yellow/30 p-4 sm:p-6 lg:p-8">
+        <div className="absolute top-0 right-0 w-24 h-24 sm:w-32 sm:h-32 bg-brand-yellow/10 rounded-full blur-2xl sm:blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-20 h-20 sm:w-24 sm:h-24 bg-brand-yellow/10 rounded-full blur-xl sm:blur-2xl" />
+        <div className="relative z-10 flex flex-col gap-4 sm:gap-6 md:flex-row md:items-center md:justify-between">
           <div>
-            <h1 className="text-3xl font-bold tracking-tight text-brand-charcoal mb-2">My Profile</h1>
-            <p className="text-lg text-brand-charcoal/70">Manage your account and personalize your experience</p>
+            <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-brand-charcoal mb-2">My Profile</h1>
+            <p className="text-base sm:text-lg text-brand-charcoal/70">Manage your account and personalize your experience</p>
           </div>
-          <div className="flex gap-3">
-            <Button variant="outline" onClick={() => setShowPasswordDialog(true)} className="bg-white/80 backdrop-blur-sm border-brand-yellow/30 hover:bg-white">
+          <div className="flex flex-col sm:flex-row gap-3">
+            <Button variant="outline" onClick={() => setShowPasswordDialog(true)} className="bg-white/80 backdrop-blur-sm border-brand-yellow/30 hover:bg-white w-full sm:w-auto">
               <Lock className="h-4 w-4 mr-2" />
               Change Password
             </Button>
-            <Button onClick={handleSave} className="bg-brand-charcoal text-white hover:bg-brand-charcoal/90 shadow-lg">
+            <Button onClick={handleSave} className="bg-brand-charcoal text-white hover:bg-brand-charcoal/90 shadow-lg w-full sm:w-auto">
               <User className="h-4 w-4 mr-2" />
               Save Changes
             </Button>
@@ -67,29 +67,29 @@ function ProfilePage() {
       </div>
 
       {/* Stats Cards */}
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-3 sm:gap-4 grid-cols-2 sm:grid-cols-2 lg:grid-cols-4">
         {stats.map((stat, index) => {
           const Icon = stat.icon;
           return (
-            <Card key={index} className="group relative overflow-hidden rounded-2xl border-0 bg-gradient-to-br from-white to-gray-50 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-              <CardContent className="p-6">
+            <Card key={index} className="group relative overflow-hidden rounded-xl sm:rounded-2xl border-0 bg-gradient-to-br from-white to-gray-50 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+              <CardContent className="p-4 sm:p-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm font-medium text-brand-charcoal/60 mb-1">{stat.label}</p>
-                    <p className={`text-xl font-bold ${
+                    <p className="text-xs sm:text-sm font-medium text-brand-charcoal/60 mb-1">{stat.label}</p>
+                    <p className={`text-lg sm:text-xl font-bold ${
                       stat.color === 'emerald' ? 'text-emerald-600' :
                       stat.color === 'blue' ? 'text-blue-600' :
                       stat.color === 'yellow' ? 'text-amber-600' :
                       'text-purple-600'
                     }`}>{stat.value}</p>
                   </div>
-                  <div className={`h-12 w-12 rounded-xl flex items-center justify-center ${
+                  <div className={`h-10 w-10 sm:h-12 sm:w-12 rounded-xl flex items-center justify-center ${
                     stat.color === 'emerald' ? 'bg-emerald-100 text-emerald-600' :
                     stat.color === 'blue' ? 'bg-blue-100 text-blue-600' :
                     stat.color === 'yellow' ? 'bg-amber-100 text-amber-600' :
                     'bg-purple-100 text-purple-600'
                   } transition-all group-hover:scale-110`}>
-                    <Icon className="h-6 w-6" />
+                    <Icon className="h-5 w-5 sm:h-6 sm:w-6" />
                   </div>
                 </div>
               </CardContent>
@@ -98,32 +98,32 @@ function ProfilePage() {
         })}
       </div>
 
-      <div className="grid gap-8 lg:grid-cols-3">
+      <div className="grid gap-6 lg:grid-cols-3">
         {/* Avatar Upload Card */}
-        <Card className="lg:col-span-1 relative overflow-hidden rounded-2xl border-0 bg-gradient-to-br from-brand-yellow/10 to-brand-yellow/5 shadow-xl">
-          <div className="absolute top-0 right-0 w-20 h-20 bg-brand-yellow/10 rounded-full blur-2xl" />
-          <CardHeader className="relative z-10">
-            <CardTitle className="text-lg font-bold text-brand-charcoal flex items-center gap-2">
-              <Camera className="h-5 w-5" />
+        <Card className="lg:col-span-1 relative overflow-hidden rounded-xl sm:rounded-2xl border-0 bg-gradient-to-br from-brand-yellow/10 to-brand-yellow/5 shadow-xl">
+          <div className="absolute top-0 right-0 w-16 h-16 sm:w-20 sm:h-20 bg-brand-yellow/10 rounded-full blur-xl sm:blur-2xl" />
+          <CardHeader className="relative z-10 pb-4">
+            <CardTitle className="text-base sm:text-lg font-bold text-brand-charcoal flex items-center gap-2">
+              <Camera className="h-4 w-4 sm:h-5 sm:w-5" />
               Profile Picture
             </CardTitle>
           </CardHeader>
-          <CardContent className="relative z-10 space-y-6">
+          <CardContent className="relative z-10 space-y-4 sm:space-y-6">
             <div className="flex flex-col items-center space-y-4">
               <div className="relative group">
                 {profileData.avatar ? (
                   <img
                     src={profileData.avatar}
                     alt="Profile"
-                    className="h-32 w-32 rounded-full object-cover ring-4 ring-white shadow-xl transition-all group-hover:scale-105"
+                    className="h-24 w-24 sm:h-32 sm:w-32 rounded-full object-cover ring-4 ring-white shadow-xl transition-all group-hover:scale-105"
                   />
                 ) : (
-                  <div className="h-32 w-32 rounded-full bg-gradient-to-br from-brand-yellow to-brand-yellow/80 text-4xl font-bold text-brand-charcoal flex items-center justify-center ring-4 ring-white shadow-xl transition-all group-hover:scale-105">
+                  <div className="h-24 w-24 sm:h-32 sm:w-32 rounded-full bg-gradient-to-br from-brand-yellow to-brand-yellow/80 text-3xl sm:text-4xl font-bold text-brand-charcoal flex items-center justify-center ring-4 ring-white shadow-xl transition-all group-hover:scale-105">
                     {profileData.fullName.split(' ').map(n => n[0]).join('').toUpperCase()}
                   </div>
                 )}
-                <label className="absolute bottom-2 right-2 h-10 w-10 rounded-full bg-brand-charcoal text-white flex items-center justify-center cursor-pointer hover:bg-brand-charcoal/90 transition-all hover:scale-110 shadow-lg">
-                  <Camera className="h-5 w-5" />
+                <label className="absolute bottom-2 right-2 h-8 w-8 sm:h-10 sm:w-10 rounded-full bg-brand-charcoal text-white flex items-center justify-center cursor-pointer hover:bg-brand-charcoal/90 transition-all hover:scale-110 shadow-lg">
+                  <Camera className="h-4 w-4 sm:h-5 sm:w-5" />
                   <input
                     type="file"
                     accept="image/*"
@@ -153,23 +153,23 @@ function ProfilePage() {
         </Card>
 
         {/* Personal Information Card */}
-        <Card className="lg:col-span-2 relative overflow-hidden rounded-2xl border-0 bg-gradient-to-br from-white to-gray-50 shadow-xl">
-          <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-brand-yellow/10 to-transparent rounded-full blur-3xl" />
-          <CardHeader className="relative z-10">
-            <CardTitle className="text-lg font-bold text-brand-charcoal flex items-center gap-2">
-              <User className="h-5 w-5" />
+        <Card className="lg:col-span-2 relative overflow-hidden rounded-xl sm:rounded-2xl border-0 bg-gradient-to-br from-white to-gray-50 shadow-xl">
+          <div className="absolute top-0 right-0 w-24 h-24 sm:w-32 sm:h-32 bg-gradient-to-br from-brand-yellow/10 to-transparent rounded-full blur-2xl sm:blur-3xl" />
+          <CardHeader className="relative z-10 pb-4">
+            <CardTitle className="text-base sm:text-lg font-bold text-brand-charcoal flex items-center gap-2">
+              <User className="h-4 w-4 sm:h-5 sm:w-5" />
               Personal Information
             </CardTitle>
           </CardHeader>
-          <CardContent className="relative z-10 space-y-6">
-            <div className="grid gap-6 sm:grid-cols-2">
+          <CardContent className="relative z-10 space-y-4 sm:space-y-6">
+            <div className="grid gap-4 sm:gap-6 sm:grid-cols-2">
               <div className="space-y-2">
                 <Label htmlFor="fullName" className="text-sm font-semibold text-brand-charcoal">Full Name</Label>
                 <Input
                   id="fullName"
                   value={profileData.fullName}
                   onChange={(e) => handleInputChange('fullName', e.target.value)}
-                  className="h-11 rounded-xl border-brand-yellow/20 focus:border-brand-yellow focus:ring-brand-yellow/20"
+                  className="h-10 sm:h-11 rounded-xl border-brand-yellow/20 focus:border-brand-yellow focus:ring-brand-yellow/20"
                 />
               </div>
 
@@ -183,7 +183,7 @@ function ProfilePage() {
                   type="email"
                   value={profileData.email}
                   onChange={(e) => handleInputChange('email', e.target.value)}
-                  className="h-11 rounded-xl border-brand-yellow/20 focus:border-brand-yellow focus:ring-brand-yellow/20"
+                  className="h-10 sm:h-11 rounded-xl border-brand-yellow/20 focus:border-brand-yellow focus:ring-brand-yellow/20"
                 />
               </div>
 
@@ -196,7 +196,7 @@ function ProfilePage() {
                   id="phone"
                   value={profileData.phone}
                   onChange={(e) => handleInputChange('phone', e.target.value)}
-                  className="h-11 rounded-xl border-brand-yellow/20 focus:border-brand-yellow focus:ring-brand-yellow/20"
+                  className="h-10 sm:h-11 rounded-xl border-brand-yellow/20 focus:border-brand-yellow focus:ring-brand-yellow/20"
                 />
               </div>
             </div>
@@ -206,18 +206,18 @@ function ProfilePage() {
 
       {/* Password Change Dialog */}
       {showPasswordDialog && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
-          <div className="w-full max-w-md mx-4 rounded-3xl border-0 bg-gradient-to-br from-white to-gray-50 shadow-2xl p-8">
-            <div className="flex items-center justify-between mb-8">
-              <h3 className="text-xl font-bold text-brand-charcoal flex items-center gap-2">
-                <Lock className="h-6 w-6" />
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
+          <div className="w-full max-w-md mx-4 rounded-2xl sm:rounded-3xl border-0 bg-gradient-to-br from-white to-gray-50 shadow-2xl p-6 sm:p-8">
+            <div className="flex items-center justify-between mb-6 sm:mb-8">
+              <h3 className="text-lg sm:text-xl font-bold text-brand-charcoal flex items-center gap-2">
+                <Lock className="h-5 w-5 sm:h-6 sm:w-6" />
                 Change Password
               </h3>
               <Button
                 variant="ghost"
                 size="sm"
                 onClick={() => setShowPasswordDialog(false)}
-                className="h-10 w-10 p-0 rounded-full hover:bg-brand-yellow/10"
+                className="h-8 w-8 sm:h-10 sm:w-10 p-0 rounded-full hover:bg-brand-yellow/10"
               >
                 ×
               </Button>

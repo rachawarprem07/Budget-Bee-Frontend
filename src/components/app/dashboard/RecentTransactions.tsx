@@ -94,7 +94,7 @@ export function RecentTransactions({ items }: { items: Tx[] }) {
                     positive ? "bg-emerald-50 text-emerald-600" : "bg-red-50 text-red-600"
                   )}
                 >
-                  {positive ? "+" : "-"}${Math.abs(t.amount).toFixed(2)}
+                  {positive ? "+" : "-"}₹{Math.abs(t.amount).toFixed(2)}
                 </span>
               </li>
             );

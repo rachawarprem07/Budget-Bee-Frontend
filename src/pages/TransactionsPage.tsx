@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { Wallet, Plus, Download, Upload, TrendingUp, TrendingDown, Coffee, ShoppingBag, Car, Home, Sparkles, Briefcase, Search, MoreVertical, Archive, Edit, Trash2 } from "lucide-react";
+import { Wallet, Plus, Download, Upload, TrendingUp, TrendingDown, Coffee, ShoppingBag, Car, Home, Sparkles, Briefcase, Search, MoreVertical, Archive, Edit, Trash2, Calendar, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
@@ -27,43 +27,43 @@ const categoryIcon: Record<string, any> = {
 };
 
 const mockTransactions: Transaction[] = [
-  { id: "1", name: "Salary — Acme Inc", category: "Income", amount: 4200, date: "Today" },
-  { id: "2", name: "Freelance Project", category: "Income", amount: 850, date: "Today" },
-  { id: "3", name: "Blue Bottle Coffee", category: "Food & Drink", amount: -6.5, date: "Today" },
-  { id: "4", name: "Whole Foods", category: "Groceries", amount: -82.3, date: "Yesterday" },
-  { id: "5", name: "Uber", category: "Transport", amount: -14.2, date: "Yesterday" },
-  { id: "6", name: "Rent — September", category: "Housing", amount: -1200, date: "Sep 1" },
-  { id: "7", name: "Electricity Bill", category: "Housing", amount: -145.50, date: "Sep 1" },
-  { id: "8", name: "Spotify", category: "Subscriptions", amount: -9.99, date: "Aug 30" },
-  { id: "9", name: "Netflix", category: "Subscriptions", amount: -15.99, date: "Aug 30" },
-  { id: "10", name: "Amazon", category: "Shopping", amount: -45.67, date: "Aug 29" },
-  { id: "11", name: "Target", category: "Shopping", amount: -67.89, date: "Aug 28" },
-  { id: "12", name: "Gas Station", category: "Transport", amount: -42.50, date: "Aug 27" },
-  { id: "13", name: "Starbucks", category: "Food & Drink", amount: -8.75, date: "Aug 27" },
-  { id: "14", name: "Gym Membership", category: "Subscriptions", amount: -29.99, date: "Aug 26" },
-  { id: "15", name: "Restaurant Dinner", category: "Food & Drink", amount: -85.20, date: "Aug 25" },
-  { id: "16", name: "Internet Bill", category: "Housing", amount: -79.99, date: "Aug 24" },
-  { id: "17", name: "Clothing Store", category: "Shopping", amount: -123.45, date: "Aug 23" },
-  { id: "18", name: "Grocery Shopping", category: "Groceries", amount: -56.78, date: "Aug 22" },
-  { id: "19", name: "Uber Eats", category: "Food & Drink", amount: -23.45, date: "Aug 21" },
-  { id: "20", name: "Parking Fee", category: "Transport", amount: -12.00, date: "Aug 20" },
-  { id: "21", name: "Coffee Shop", category: "Food & Drink", amount: -5.50, date: "Aug 19" },
-  { id: "22", name: "Phone Bill", category: "Housing", amount: -65.00, date: "Aug 18" },
-  { id: "23", name: "Apple Store", category: "Shopping", amount: -299.99, date: "Aug 17" },
-  { id: "24", name: "Lyft", category: "Transport", amount: -18.75, date: "Aug 16" },
-  { id: "25", name: "Grocery Market", category: "Groceries", amount: -78.92, date: "Aug 15" },
-  { id: "26", name: "Movie Tickets", category: "Entertainment", amount: -32.00, date: "Aug 14" },
-  { id: "27", name: "Concert Tickets", category: "Entertainment", amount: -125.00, date: "Aug 13" },
-  { id: "28", name: "Book Store", category: "Shopping", amount: -45.00, date: "Aug 12" },
-  { id: "29", name: "Pharmacy", category: "Groceries", amount: -28.50, date: "Aug 11" },
-  { id: "30", name: "Hotel Booking", category: "Travel", amount: -250.00, date: "Aug 10" },
+  { id: "1", name: "Salary — Acme Inc", category: "Income", amount: 352800, date: "Today" },
+  { id: "2", name: "Freelance Project", category: "Income", amount: 71400, date: "Today" },
+  { id: "3", name: "Blue Bottle Coffee", category: "Food & Drink", amount: -546, date: "Today" },
+  { id: "4", name: "Whole Foods", category: "Groceries", amount: -6933, date: "Yesterday" },
+  { id: "5", name: "Uber", category: "Transport", amount: -1197, date: "Yesterday" },
+  { id: "6", name: "Rent — September", category: "Housing", amount: -100800, date: "Sep 1" },
+  { id: "7", name: "Electricity Bill", category: "Housing", amount: -12222, date: "Sep 1" },
+  { id: "8", name: "Spotify", category: "Subscriptions", amount: -839, date: "Aug 30" },
+  { id: "9", name: "Netflix", category: "Subscriptions", amount: -1347, date: "Aug 30" },
+  { id: "10", name: "Amazon", category: "Shopping", amount: -3846, date: "Aug 29" },
+  { id: "11", name: "Target", category: "Shopping", amount: -5719, date: "Aug 28" },
+  { id: "12", name: "Gas Station", category: "Transport", amount: -3575, date: "Aug 27" },
+  { id: "13", name: "Starbucks", category: "Food & Drink", amount: -736, date: "Aug 27" },
+  { id: "14", name: "Gym Membership", category: "Subscriptions", amount: -2519, date: "Aug 26" },
+  { id: "15", name: "Restaurant Dinner", category: "Food & Drink", amount: -7168, date: "Aug 25" },
+  { id: "16", name: "Internet Bill", category: "Housing", amount: -6739, date: "Aug 24" },
+  { id: "17", name: "Clothing Store", category: "Shopping", amount: -10395, date: "Aug 23" },
+  { id: "18", name: "Grocery Shopping", category: "Groceries", amount: -4780, date: "Aug 22" },
+  { id: "19", name: "Uber Eats", category: "Food & Drink", amount: -1973, date: "Aug 21" },
+  { id: "20", name: "Parking Fee", category: "Transport", amount: -1008, date: "Aug 20" },
+  { id: "21", name: "Coffee Shop", category: "Food & Drink", amount: -462, date: "Aug 19" },
+  { id: "22", name: "Phone Bill", category: "Housing", amount: -5460, date: "Aug 18" },
+  { id: "23", name: "Apple Store", category: "Shopping", amount: -25200, date: "Aug 17" },
+  { id: "24", name: "Lyft", category: "Transport", amount: -1578, date: "Aug 16" },
+  { id: "25", name: "Grocery Market", category: "Groceries", amount: -6652, date: "Aug 15" },
+  { id: "26", name: "Movie Tickets", category: "Entertainment", amount: -2688, date: "Aug 14" },
+  { id: "27", name: "Concert Tickets", category: "Entertainment", amount: -10500, date: "Aug 13" },
+  { id: "28", name: "Book Store", category: "Shopping", amount: -3780, date: "Aug 12" },
+  { id: "29", name: "Pharmacy", category: "Groceries", amount: -2394, date: "Aug 11" },
+  { id: "30", name: "Hotel Booking", category: "Travel", amount: -21000, date: "Aug 10" },
 ];
 
 const categories = Object.keys(categoryIcon);
 
 function TransactionsPage() {
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [selectedCategory, setSelectedCategory] = useState<string[] | "all">("all" as any);
   const [showAddDialog, setShowAddDialog] = useState(false);
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const [showArchived, setShowArchived] = useState(false);
@@ -72,16 +72,31 @@ function TransactionsPage() {
   const [showPinModal, setShowPinModal] = useState(false);
   const [pin, setPin] = useState("");
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [dateRange, setDateRange] = useState({
+    start: "",
+    end: ""
+  });
 
   const filteredTransactions = useMemo(() => {
     return mockTransactions.filter((transaction) => {
       const matchesSearch = transaction.name.toLowerCase().includes(searchTerm.toLowerCase());
-      const matchesCategory = selectedCategory === "all" || transaction.category === selectedCategory;
+      const matchesCategory = selectedCategory === "all" || 
+        (Array.isArray(selectedCategory) ? (selectedCategory as string[]).includes(transaction.category) : transaction.category === selectedCategory);
       const matchesArchived = showArchived ? transaction.archived === true : !transaction.archived;
       const matchesPasscode = showArchived ? isAuthenticated && (!passcode || transaction.id.toString().slice(-4) === passcode) : true;
-      return matchesSearch && matchesCategory && matchesArchived && matchesPasscode;
+      
+      // Date range filtering
+      let matchesDateRange = true;
+      if (dateRange.start && dateRange.end) {
+        const transactionDate = new Date(transaction.date);
+        const startDate = new Date(dateRange.start);
+        const endDate = new Date(dateRange.end);
+        matchesDateRange = transactionDate >= startDate && transactionDate <= endDate;
+      }
+      
+      return matchesSearch && matchesCategory && matchesArchived && matchesPasscode && matchesDateRange;
     });
-  }, [searchTerm, selectedCategory, showArchived, passcode, isAuthenticated]);
+  }, [searchTerm, selectedCategory, showArchived, passcode, isAuthenticated, dateRange]);
 
   const handlePinSubmit = () => {
     if (pin === "1234") {
@@ -239,7 +254,7 @@ function TransactionsPage() {
             </div>
             <div>
               <p className="text-xs font-medium text-emerald-700">Total Income</p>
-              <p className="text-xl font-bold text-emerald-600">+${totalIncome.toFixed(2)}</p>
+              <p className="text-xl font-bold text-emerald-600">+₹{totalIncome.toFixed(2)}</p>
             </div>
           </div>
         </div>
@@ -250,7 +265,7 @@ function TransactionsPage() {
             </div>
             <div>
               <p className="text-xs font-medium text-red-700">Total Expenses</p>
-              <p className="text-xl font-bold text-red-600">-${totalExpenses.toFixed(2)}</p>
+              <p className="text-xl font-bold text-red-600">-₹{totalExpenses.toFixed(2)}</p>
             </div>
           </div>
         </div>
@@ -265,7 +280,7 @@ function TransactionsPage() {
                 "text-xl font-bold",
                 netBalance >= 0 ? "text-emerald-600" : "text-red-600"
               )}>
-                {netBalance >= 0 ? "+" : "-"}${Math.abs(netBalance).toFixed(2)}
+                {netBalance >= 0 ? "+" : "-"}₹{Math.abs(netBalance).toFixed(2)}
               </p>
             </div>
           </div>
@@ -283,6 +298,81 @@ function TransactionsPage() {
             className="pl-10 w-full"
           />
         </div>
+        <div className="flex gap-2 flex-wrap">
+          {/* Date Range Inputs */}
+          <div className="flex gap-2 items-center">
+            <Calendar className="h-4 w-4 text-brand-charcoal/40" />
+            <Input
+              type="date"
+              placeholder="Start date"
+              value={dateRange.start}
+              onChange={(e) => setDateRange(prev => ({ ...prev, start: e.target.value }))}
+              className="w-auto"
+            />
+            <span className="text-sm text-brand-charcoal/60">to</span>
+            <Input
+              type="date"
+              placeholder="End date"
+              value={dateRange.end}
+              onChange={(e) => setDateRange(prev => ({ ...prev, end: e.target.value }))}
+              className="w-auto"
+            />
+          </div>
+          {/* Multi-Select Categories */}
+          <div className="relative">
+            <button
+              onClick={() => {
+                const dropdown = document.getElementById('category-dropdown');
+                if (dropdown) {
+                  if (dropdown.style.display === 'block') {
+                    dropdown.style.display = 'none';
+                  } else {
+                    dropdown.style.display = 'block';
+                  }
+                }
+              }}
+              className="rounded-md border border-input bg-background px-3 py-2 text-sm w-auto flex items-center gap-2"
+            >
+              <span>
+                {Array.isArray(selectedCategory) 
+                  ? `${selectedCategory.length} categories selected` 
+                  : selectedCategory === "all" 
+                    ? "All Categories" 
+                    : selectedCategory
+                }
+              </span>
+              <ChevronDown className="h-4 w-4" />
+            </button>
+            <div
+              id="category-dropdown"
+              className="absolute top-full mt-1 w-48 rounded-md border border-border/60 bg-background shadow-lg z-10 hidden"
+            >
+              <div>
+                {categories.map((category: string) => (
+                  <label key={category} className="flex items-center gap-2 p-2 hover:bg-gray-50 rounded cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={selectedCategory === "all" || (Array.isArray(selectedCategory) && selectedCategory.includes(category))}
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                        if (e.target.checked) {
+                          setSelectedCategory("all");
+                        } else if (Array.isArray(selectedCategory)) {
+                          setSelectedCategory(selectedCategory.filter((cat: string) => cat !== "all"));
+                        } else if (typeof selectedCategory === 'string') {
+                          setSelectedCategory(selectedCategory !== category ? [category] : []);
+                        } else {
+                          setSelectedCategory([]);
+                        }
+                      }}
+                      className="rounded"
+                    />
+                    <span>{category}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
         {showArchived && (
           <Input
             placeholder="Enter 4-digit passcode"
@@ -292,18 +382,6 @@ function TransactionsPage() {
             maxLength={4}
           />
         )}
-        <select
-          value={selectedCategory}
-          onChange={(e) => setSelectedCategory(e.target.value)}
-          className="rounded-md border border-input bg-background px-3 py-2 text-sm w-full md:w-auto"
-        >
-          <option value="all">All Categories</option>
-          {categories.map((category) => (
-            <option key={category} value={category}>
-              {category}
-            </option>
-          ))}
-        </select>
       </div>
 
       {/* Transactions List */}
@@ -361,7 +439,7 @@ function TransactionsPage() {
                           isIncome ? "bg-emerald-50 text-emerald-600" : "bg-red-50 text-red-600"
                         )}
                       >
-                        {isIncome ? "+" : "-"}${Math.abs(transaction.amount).toFixed(2)}
+                        {isIncome ? "+" : "-"}₹{Math.abs(transaction.amount).toFixed(2)}
                       </span>
                       <div className="relative">
                         <button

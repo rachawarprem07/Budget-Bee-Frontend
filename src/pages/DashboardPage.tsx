@@ -12,12 +12,12 @@ import { AddBudgetDialog } from "@/components/app/dashboard/AddBudgetDialog";
 import { toast } from "sonner";
 
 const initialTxs: Tx[] = [
-  { id: "1", name: "Salary — Acme Inc", category: "Income", amount: 4200, date: "Today" },
-  { id: "2", name: "Blue Bottle Coffee", category: "Food & Drink", amount: -6.5, date: "Today" },
-  { id: "3", name: "Whole Foods", category: "Groceries", amount: -82.3, date: "Yesterday" },
-  { id: "4", name: "Uber", category: "Transport", amount: -14.2, date: "Yesterday" },
-  { id: "5", name: "Rent — September", category: "Housing", amount: -1200, date: "Sep 1" },
-  { id: "6", name: "Spotify", category: "Subscriptions", amount: -9.99, date: "Aug 30" },
+  { id: "1", name: "Salary — Acme Inc", category: "Income", amount: 352800, date: "Today" },
+  { id: "2", name: "Blue Bottle Coffee", category: "Food & Drink", amount: -546, date: "Today" },
+  { id: "3", name: "Whole Foods", category: "Groceries", amount: -6933, date: "Yesterday" },
+  { id: "4", name: "Uber", category: "Transport", amount: -1197, date: "Yesterday" },
+  { id: "5", name: "Rent — September", category: "Housing", amount: -100800, date: "Sep 1" },
+  { id: "6", name: "Spotify", category: "Subscriptions", amount: -839, date: "Aug 30" },
 ];
 
 const initialBudgets: BudgetRow[] = [
@@ -93,10 +93,10 @@ function DashboardPage() {
 
         {/* Stat cards */}
         <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-          <StatCard label="Total balance" value="$12,840.50" delta={4.2} icon={Wallet} accent="yellow" sub="vs last month" />
-          <StatCard label="Income (Sep)" value="$4,200.00" delta={2.1} icon={TrendingUp} accent="green" sub="vs Aug" />
-          <StatCard label="Expenses (Sep)" value="$2,520.10" delta={-3.4} icon={CreditCard} accent="violet" sub="vs Aug" />
-          <StatCard label="Saved this month" value="$1,679.90" delta={12} icon={PiggyBank} accent="blue" sub="40% of income" />
+          <StatCard label="Total balance" value="₹10,84,050" delta={4.2} icon={Wallet} accent="yellow" sub="vs last month" />
+          <StatCard label="Income" value="₹3,51,000" delta={2.1} icon={TrendingUp} accent="green" sub="vs Aug" />
+          <StatCard label="Expenses" value="₹2,10,010" delta={-3.4} icon={CreditCard} accent="violet" sub="vs Aug" />
+          <StatCard label="Saved this month" value="₹1,40,990" delta={12} icon={PiggyBank} accent="blue" sub="40% of income" />
         </div>
 
         {/* Charts row */}

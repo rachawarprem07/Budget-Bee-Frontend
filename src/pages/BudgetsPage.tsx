@@ -139,7 +139,7 @@ function BudgetsPage() {
             </div>
             <div>
               <p className="text-xs font-medium text-blue-700">Total Budgeted</p>
-              <p className="text-xl font-bold text-blue-600">${totalBudgeted.toFixed(2)}</p>
+              <p className="text-xl font-bold text-blue-600">₹{totalBudgeted.toFixed(2)}</p>
             </div>
           </div>
         </div>
@@ -150,7 +150,7 @@ function BudgetsPage() {
             </div>
             <div>
               <p className="text-xs font-medium text-amber-700">Total Spent</p>
-              <p className="text-xl font-bold text-amber-600">${totalSpent.toFixed(2)}</p>
+              <p className="text-xl font-bold text-amber-600">₹{totalSpent.toFixed(2)}</p>
             </div>
           </div>
         </div>
@@ -161,7 +161,7 @@ function BudgetsPage() {
             </div>
             <div>
               <p className="text-xs font-medium text-teal-700">Remaining</p>
-              <p className="text-xl font-bold text-teal-600">${totalRemaining.toFixed(2)}</p>
+              <p className="text-xl font-bold text-teal-600">₹{totalRemaining.toFixed(2)}</p>
             </div>
           </div>
         </div>
@@ -223,7 +223,7 @@ function BudgetsPage() {
                     <div className="text-right flex-1 ml-4">
                       <div className="mb-1">
                         <span className="text-xs font-bold text-brand-charcoal">
-                          ${budget.spent.toFixed(2)} / ${budget.budget.toFixed(2)}
+                          ₹{budget.spent.toFixed(2)} / ₹{budget.budget.toFixed(2)}
                         </span>
                       </div>
                       <div className="flex items-center gap-1 justify-end">

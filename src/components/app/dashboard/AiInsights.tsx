@@ -10,13 +10,13 @@ const tips = [
   {
     icon: AlertTriangle,
     title: "Entertainment is over budget",
-    body: "You've spent $240 of $200. Consider trimming subscriptions you don't use.",
+    body: "You've spent ₹20,000 of ₹16,000. Consider trimming subscriptions you don't use.",
     tone: "bg-amber-50 text-amber-700 ring-amber-200",
   },
   {
     icon: Sparkles,
     title: "Round-up suggestion",
-    body: "Enable round-ups on coffee purchases to add ~$18/mo to savings.",
+    body: "Enable round-ups on coffee purchases to add ~₹1,500/mo to savings.",
     tone: "bg-violet-50 text-violet-700 ring-violet-200",
   },
 ];

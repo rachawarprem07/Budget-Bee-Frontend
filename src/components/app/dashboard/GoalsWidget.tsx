@@ -30,7 +30,7 @@ export function GoalsWidget() {
                   <div>
                     <p className="text-sm font-medium text-brand-charcoal">{g.name}</p>
                     <p className="text-xs text-brand-charcoal/55">
-                      ${g.saved.toLocaleString()} / ${g.target.toLocaleString()}
+                      ₹{g.saved.toLocaleString()} / ₹{g.target.toLocaleString()}
                     </p>
                   </div>
                 </div>

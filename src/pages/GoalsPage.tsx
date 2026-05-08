@@ -139,7 +139,7 @@ function GoalsPage() {
             </div>
             <div>
               <p className="text-xs font-medium text-cyan-700">Total Target</p>
-              <p className="text-xl font-bold text-cyan-600">${totalTarget.toFixed(2)}</p>
+              <p className="text-xl font-bold text-cyan-600">₹{totalTarget.toFixed(2)}</p>
             </div>
           </div>
         </div>
