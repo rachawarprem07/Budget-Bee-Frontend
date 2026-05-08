@@ -177,7 +177,7 @@ function TransactionsPage() {
           <h1 className="text-2xl font-bold tracking-tight text-brand-charcoal">Transactions</h1>
           <p className="text-sm text-brand-charcoal/60">Every penny in and out, beautifully organized.</p>
         </div>
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2">
           <Button size="sm" variant="outline" asChild>
             <label className="cursor-pointer">
               <Upload className="h-4 w-4 mr-2" />
@@ -252,13 +252,13 @@ function TransactionsPage() {
 
       {/* Search */}
       <div className="flex flex-col gap-4 md:flex-row">
-        <div className="relative flex-1">
+        <div className="relative flex-1 w-full">
           <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-brand-charcoal/40" />
           <Input
             placeholder="Search transactions..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="pl-10"
+            className="pl-10 w-full"
           />
         </div>
         {showArchived && (
@@ -266,14 +266,14 @@ function TransactionsPage() {
             placeholder="Enter 4-digit passcode"
             value={passcode}
             onChange={(e) => setPasscode(e.target.value)}
-            className="md:w-48"
+            className="w-full md:w-48"
             maxLength={4}
           />
         )}
         <select
           value={selectedCategory}
           onChange={(e) => setSelectedCategory(e.target.value)}
-          className="rounded-md border border-input bg-background px-3 py-2 text-sm md:w-auto w-full"
+          className="rounded-md border border-input bg-background px-3 py-2 text-sm w-full md:w-auto"
         >
           <option value="all">All Categories</option>
           {categories.map((category) => (
@@ -300,19 +300,19 @@ function TransactionsPage() {
                 
                 return (
                   <li key={transaction.id} className="py-4">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-muted text-brand-charcoal/80 ring-1 ring-border/60">
+                    <div className="flex items-center justify-between gap-2">
+                      <div className="flex items-center gap-3 min-w-0 flex-1">
+                        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-muted text-brand-charcoal/80 ring-1 ring-border/60 flex-shrink-0">
                           <Icon className="h-5 w-5" />
                         </div>
-                        <div>
-                          <p className="text-sm font-medium text-brand-charcoal">{transaction.name}</p>
-                          <p className="text-xs text-brand-charcoal/55">
+                        <div className="min-w-0 flex-1">
+                          <p className="text-sm font-medium text-brand-charcoal truncate">{transaction.name}</p>
+                          <p className="text-xs text-brand-charcoal/55 truncate">
                             {transaction.category} · {transaction.date}
                           </p>
                         </div>
                       </div>
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-2 flex-shrink-0">
                         <span
                           className={cn(
                             "text-sm font-semibold tabular-nums",
@@ -368,7 +368,7 @@ function TransactionsPage() {
       <AddTransactionDialog
         open={showAddDialog}
         onOpenChange={setShowAddDialog}
-        onAddTransaction={handleAddTransaction}
+        onAddTransaction={handleAddTransaction} 
       />
       
       {/* Edit Transaction Dialog */}
@@ -382,8 +382,8 @@ function TransactionsPage() {
 
       {/* PIN Modal */}
       {showPinModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-          <div className="w-full max-w-md mx-4 rounded-2xl border border-border/60 bg-card shadow-[0_10px_40px_-20px_rgba(0,0,0,0.1)] p-6">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
+          <div className="w-full max-w-md rounded-2xl border border-border/60 bg-card shadow-[0_10px_40px_-20px_rgba(0,0,0,0.1)] p-6">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-lg font-semibold text-brand-charcoal">Enter PIN</h3>
               <Button
@@ -406,14 +406,14 @@ function TransactionsPage() {
                   placeholder="••••"
                   value={pin}
                   onChange={(e) => setPin(e.target.value)}
-                  className="mt-1"
+                  className="mt-1 w-full"
                 />
               </div>
               <div className="flex gap-2">
-                <Button variant="outline" onClick={() => setShowPinModal(false)}>
+                <Button variant="outline" onClick={() => setShowPinModal(false)} className="flex-1">
                   Cancel
                 </Button>
-                <Button onClick={handlePinSubmit}>
+                <Button onClick={handlePinSubmit} className="flex-1">
                   Submit
                 </Button>
               </div>
