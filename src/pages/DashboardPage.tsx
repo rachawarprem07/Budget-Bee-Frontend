@@ -75,20 +75,6 @@ function DashboardPage() {
               Here's how your money is doing today.
             </p>
           </div>
-          <div className="flex flex-wrap gap-2">
-            <button
-              onClick={() => setOpenTx(true)}
-              className="inline-flex items-center gap-1.5 rounded-full bg-brand-charcoal px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:opacity-90"
-            >
-              <Plus className="h-4 w-4" /> Add transaction
-            </button>
-            <button
-              onClick={() => setOpenBudget(true)}
-              className="inline-flex items-center gap-1.5 rounded-full bg-brand-yellow px-4 py-2 text-sm font-semibold text-brand-charcoal shadow-sm transition hover:brightness-105"
-            >
-              New budget <ArrowRight className="h-4 w-4" />
-            </button>
-          </div>
         </div>
 
         {/* Stat cards */}

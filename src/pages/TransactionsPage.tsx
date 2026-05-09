@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { Wallet, Plus, Download, Upload, TrendingUp, TrendingDown, Coffee, ShoppingBag, Car, Home, Sparkles, Briefcase, Search, MoreVertical, Archive, Edit, Trash2, Calendar, ChevronDown } from "lucide-react";
+import { Wallet, Plus, Download, Upload, TrendingUp, TrendingDown, Coffee, ShoppingBag, Car, Home, Sparkles, Briefcase, Search, MoreVertical, Archive, Edit, Trash2, Calendar, ChevronDown, Shield, Lock, Key } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
@@ -72,6 +72,7 @@ function TransactionsPage() {
   const [showPinModal, setShowPinModal] = useState(false);
   const [pin, setPin] = useState("");
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [pendingArchiveId, setPendingArchiveId] = useState<string | null>(null);
   const [dateRange, setDateRange] = useState({
     start: "",
     end: ""
@@ -101,7 +102,19 @@ function TransactionsPage() {
   const handlePinSubmit = () => {
     if (pin === "1234") {
       setIsAuthenticated(true);
+      
+      // If there's a pending archive action, execute it
+      if (pendingArchiveId) {
+        const index = mockTransactions.findIndex(t => t.id === pendingArchiveId);
+        if (index !== -1) {
+          mockTransactions[index] = { ...mockTransactions[index], archived: true };
+        }
+        setPendingArchiveId(null);
+        setActiveMenu(null);
+      }
+      
       setShowPinModal(false);
+      setPin("");
     }
   };
 
@@ -137,11 +150,9 @@ function TransactionsPage() {
   };
 
   const handleArchiveTransaction = (id: string) => {
-    const index = mockTransactions.findIndex(t => t.id === id);
-    if (index !== -1) {
-      mockTransactions[index] = { ...mockTransactions[index], archived: true };
-    }
-    setActiveMenu(null);
+    // Show PIN modal before archiving
+    setShowPinModal(true);
+    setPendingArchiveId(id);
   };
 
   const handleEditTransaction = (transaction: Transaction) => {
@@ -499,42 +510,122 @@ function TransactionsPage() {
         />
       )}
 
-      {/* PIN Modal */}
+      {/* Enhanced PIN Modal */}
       {showPinModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-          <div className="w-full max-w-md rounded-2xl border border-border/60 bg-card shadow-[0_10px_40px_-20px_rgba(0,0,0,0.1)] p-6">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-semibold text-brand-charcoal">Enter PIN</h3>
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => setShowPinModal(false)}
-              >
-                ×
-              </Button>
-            </div>
-            <div className="space-y-4">
-              <div>
-                <label htmlFor="pin" className="text-sm font-medium text-brand-charcoal">
-                  Enter 4-digit PIN to access archived transactions
-                </label>
-                <Input
-                  id="pin"
-                  type="password"
-                  maxLength={4}
-                  placeholder="••••"
-                  value={pin}
-                  onChange={(e) => setPin(e.target.value)}
-                  className="mt-1 w-full"
-                />
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
+          <div className="relative w-full max-w-md transform transition-all duration-300 scale-100 opacity-100">
+            {/* Decorative background elements */}
+            <div className="absolute -inset-4 bg-gradient-to-br from-brand-yellow/20 via-amber-100/30 to-brand-yellow/10 rounded-3xl blur-2xl animate-pulse" />
+            <div className="absolute -inset-2 bg-gradient-to-br from-white/90 via-white/95 to-white rounded-2xl" />
+            
+            <div className="relative w-full max-w-md rounded-2xl border border-brand-yellow/20 bg-gradient-to-br from-white to-brand-yellow/5 shadow-[0_25px_50px_-25px_rgba(251,191,36,0.15)] p-8 backdrop-blur-xl">
+              {/* Header with icon */}
+              <div className="flex items-center justify-between mb-6">
+                <div className="flex items-center gap-3">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-yellow to-amber-400 shadow-lg shadow-brand-yellow/30 animate-pulse">
+                    <Shield className="h-6 w-6 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-brand-charcoal">
+                      {pendingArchiveId ? "Secure Archive" : "Access Vault"}
+                    </h3>
+                    <p className="text-sm text-brand-charcoal/60 mt-1">
+                      {pendingArchiveId 
+                        ? "Enter PIN to protect this transaction"
+                        : "Enter PIN to access archived transactions"
+                      }
+                    </p>
+                  </div>
+                </div>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => {
+                    setShowPinModal(false);
+                    setPendingArchiveId(null);
+                    setPin("");
+                  }}
+                  className="h-8 w-8 rounded-full hover:bg-brand-yellow/10 transition-colors"
+                >
+                  ×
+                </Button>
               </div>
-              <div className="flex gap-2">
-                <Button variant="outline" onClick={() => setShowPinModal(false)} className="flex-1">
-                  Cancel
-                </Button>
-                <Button onClick={handlePinSubmit} className="flex-1">
-                  Submit
-                </Button>
+
+              {/* PIN Input Section */}
+              <div className="space-y-6">
+                <div className="relative">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-slate-100 to-slate-200 border border-slate-300">
+                      <Lock className="h-4 w-4 text-slate-600" />
+                    </div>
+                    <div className="flex-1 h-1 bg-gradient-to-r from-brand-yellow via-amber-200 to-brand-yellow rounded-full" />
+                    <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-slate-100 to-slate-200 border border-slate-300">
+                      <Key className="h-4 w-4 text-slate-600" />
+                    </div>
+                  </div>
+                  
+                  <label htmlFor="pin" className="text-sm font-semibold text-brand-charcoal">
+                    {pendingArchiveId 
+                      ? "Enter 4-digit Security PIN"
+                      : "Enter 4-digit Access PIN"
+                    }
+                  </label>
+                  <Input
+                    id="pin"
+                    type="password"
+                    maxLength={4}
+                    placeholder="••••"
+                    value={pin}
+                    onChange={(e) => setPin(e.target.value)}
+                    className="mt-2 h-12 text-center text-lg tracking-widest font-mono bg-white border-2 border-brand-yellow/20 rounded-xl focus:border-brand-yellow focus:ring-2 focus:ring-brand-yellow/20 transition-all"
+                  />
+                  
+                  {/* PIN strength indicator */}
+                  <div className="flex justify-center gap-1 mt-2">
+                    {[1, 2, 3, 4].map((digit) => (
+                      <div
+                        key={digit}
+                        className={cn(
+                          "h-2 w-2 rounded-full transition-all duration-300",
+                          pin.length >= digit 
+                            ? "bg-brand-yellow scale-110" 
+                            : "bg-gray-200"
+                        )}
+                      />
+                    ))}
+                  </div>
+                </div>
+
+                {/* Action Buttons */}
+                <div className="flex gap-3">
+                  <Button 
+                    variant="outline" 
+                    onClick={() => {
+                      setShowPinModal(false);
+                      setPendingArchiveId(null);
+                      setPin("");
+                    }} 
+                    className="flex-1 h-12 border-2 border-slate-200 hover:border-brand-yellow hover:bg-brand-yellow/5 transition-all"
+                  >
+                    Cancel
+                  </Button>
+                  <Button 
+                    onClick={handlePinSubmit} 
+                    className="flex-1 h-12 bg-gradient-to-r from-brand-yellow to-amber-400 hover:from-amber-400 hover:to-brand-yellow text-white font-semibold shadow-lg shadow-brand-yellow/30 hover:shadow-brand-yellow/40 transition-all transform hover:scale-105"
+                  >
+                    {pendingArchiveId ? (
+                      <div className="flex items-center gap-2">
+                        <Archive className="h-4 w-4" />
+                        Archive Now
+                      </div>
+                    ) : (
+                      <div className="flex items-center gap-2">
+                        <Shield className="h-4 w-4" />
+                        Access Vault
+                      </div>
+                    )}
+                  </Button>
+                </div>
               </div>
             </div>
           </div>
