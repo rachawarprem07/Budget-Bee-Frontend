@@ -1,4 +1,5 @@
 import { ArrowRight, PlayCircle, ShieldCheck, BarChart3, Target } from "lucide-react";
+import { Link } from "react-router-dom";
 import { Container } from "@/components/common/Container";
 import { BrandButton } from "@/components/common/BrandButton";
 import { HeroTrustItem } from "@/components/landing/HeroTrustItem";
@@ -37,10 +38,14 @@ export function Hero() {
           </p>
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <BrandButton rightIcon={<ArrowRight size={18} />}>Get Started Free</BrandButton>
-            <BrandButton variant="outline" leftIcon={<PlayCircle size={20} />}>
-              See How It Works
-            </BrandButton>
+            <Link to="/signup">
+              <BrandButton rightIcon={<ArrowRight size={18} />}>Join BudgetBee</BrandButton>
+            </Link>
+            <Link to="/login">
+              <BrandButton variant="outline" leftIcon={<PlayCircle size={20} />}>
+                Open BudgetBee
+              </BrandButton>
+            </Link>
           </div>
 
           <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-3">
